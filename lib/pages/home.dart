@@ -24,7 +24,20 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   void searchWebview() {
     _searchController.text.isEmpty?
-    SnackBar(content: Text('Please enter a username')) :
+
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Error'),
+          content: Text('Please enter a username'),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('OK'),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ],
+        ),
+      ):
     Navigator.push(
       context,
       MaterialPageRoute(

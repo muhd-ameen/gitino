@@ -24,8 +24,10 @@ import 'package:webview_flutter/webview_flutter.dart';
 
    @override
    Widget build(BuildContext context) {
-     return WebView(
-       initialUrl: 'https://githubmemory.com/@$widget.githubUsername',
+     return Scaffold(
+       body: WebView(
+         initialUrl: 'https://githubmemory.com/@${widget.githubUsername}',
+       ),
      );
    }
  }
