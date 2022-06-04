@@ -23,32 +23,31 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   void searchWebview() {
-    _searchController.text.isEmpty?
-
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Error'),
-          content: Text('Please enter a username'),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('OK'),
-              onPressed: () => Navigator.pop(context),
+    _searchController.text.isEmpty
+        ? showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Error'),
+              content: Text('Please enter a username'),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('OK'),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ],
             ),
-          ],
-        ),
-      ):
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => GithubWebView(
-          githubUsername: _searchController.text,
-        ),
-      ),
-    );
+          )
+        : Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => GithubWebView(
+                githubUsername: _searchController.text,
+              ),
+            ),
+          );
   }
 
-@override
+  @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
@@ -64,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
         return;
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: Color(0xffE5DC81),
           // Here we take the value from the MyHomePage object that was created by
@@ -81,18 +81,28 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Center(
           // Center is a layout widget. It takes a single child and positions it
           // in the middle of the parent.
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: ListView(
+            // mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(80.0),
+                child: Image.network(
+                  'https://www.freeiconspng.com/uploads/github-logo-icon-22.png',
+                  color: Colors.white,
+                ),
+              ),
               const Text(
                 'Please enter your GitHub username:',
+                textAlign: TextAlign.center,
                 style: TextStyle(color: Color(0xffE5DC81)),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 18, vertical: 16),
                 child: TextField(
-                    style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w800),
-
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w800),
                   controller: _searchController,
                   decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
@@ -102,7 +112,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderSide:
                           BorderSide(color: Color(0xffE5DC81), width: 2.0),
                     ),
-
                     border: OutlineInputBorder(),
                     hintText: 'Enter your github username',
                     labelText: 'Github Username',
