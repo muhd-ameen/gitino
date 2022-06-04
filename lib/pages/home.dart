@@ -48,6 +48,13 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+@override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _searchController.dispose();
+  }
+
   final TextEditingController _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -84,6 +91,8 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 18, vertical: 16),
                 child: TextField(
+                    style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w800),
+
                   controller: _searchController,
                   decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
@@ -93,6 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderSide:
                           BorderSide(color: Color(0xffE5DC81), width: 2.0),
                     ),
+
                     border: OutlineInputBorder(),
                     hintText: 'Enter your github username',
                     labelText: 'Github Username',
